@@ -606,7 +606,6 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
   };
   attributes: {
     apellidos: Schema.Attribute.String & Schema.Attribute.Required;
-    barbero: Schema.Attribute.Relation<'oneToOne', 'api::barbero.barbero'>;
     citas: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

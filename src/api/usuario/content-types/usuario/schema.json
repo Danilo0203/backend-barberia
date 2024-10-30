@@ -49,12 +49,6 @@
       "relation": "oneToMany",
       "target": "api::cita.cita",
       "mappedBy": "usuario"
-    },
-    "barbero": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::barbero.barbero",
-      "mappedBy": "usuario"
     }
   }
 }

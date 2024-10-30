@@ -19,8 +19,7 @@
     "usuario": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::usuario.usuario",
-      "inversedBy": "barbero"
+      "target": "api::usuario.usuario"
     },
     "servicios": {
       "type": "relation",
