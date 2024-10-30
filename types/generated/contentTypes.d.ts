@@ -418,16 +418,15 @@ export interface ApiCitaCita extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    barbero: Schema.Attribute.Relation<'oneToOne', 'api::barbero.barbero'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     estado: Schema.Attribute.Enumeration<
       ['pendiente', 'confirmar', 'cancelar']
-    >;
-    fecha: Schema.Attribute.Date & Schema.Attribute.Required;
-    hora: Schema.Attribute.Time &
+    > &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+      Schema.Attribute.DefaultTo<'pendiente'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'> &
       Schema.Attribute.Private;
@@ -542,7 +541,6 @@ export interface ApiServicioServicio extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descripcion: Schema.Attribute.Text;
-    duracion: Schema.Attribute.Time;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -550,8 +548,45 @@ export interface ApiServicioServicio extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     nombre: Schema.Attribute.String;
-    precio: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
+    tipo_servicios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-servicio.tipo-servicio'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTipoServicioTipoServicio
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tipo_servicios';
+  info: {
+    description: '';
+    displayName: 'tipo_servicio';
+    pluralName: 'tipo-servicios';
+    singularName: 'tipo-servicio';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-servicio.tipo-servicio'
+    > &
+      Schema.Attribute.Private;
+    precio: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    tiempo: Schema.Attribute.Time & Schema.Attribute.Required;
+    tipo: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1112,6 +1147,7 @@ declare module '@strapi/strapi' {
       'api::permiso.permiso': ApiPermisoPermiso;
       'api::rol.rol': ApiRolRol;
       'api::servicio.servicio': ApiServicioServicio;
+      'api::tipo-servicio.tipo-servicio': ApiTipoServicioTipoServicio;
       'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

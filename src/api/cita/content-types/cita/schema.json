@@ -12,15 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "fecha": {
-      "required": true,
-      "type": "date"
-    },
-    "hora": {
-      "type": "time",
-      "required": true,
-      "unique": true
-    },
     "usuario": {
       "type": "relation",
       "relation": "manyToOne",
@@ -33,7 +24,14 @@
         "pendiente",
         "confirmar",
         "cancelar"
-      ]
+      ],
+      "default": "pendiente",
+      "required": true
+    },
+    "barbero": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::barbero.barbero"
     }
   }
 }

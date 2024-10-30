@@ -18,11 +18,10 @@
     "descripcion": {
       "type": "text"
     },
-    "duracion": {
-      "type": "time"
-    },
-    "precio": {
-      "type": "decimal"
+    "tipo_servicios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tipo-servicio.tipo-servicio"
     }
   }
 }
