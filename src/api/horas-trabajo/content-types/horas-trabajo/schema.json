@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "horas_trabajos",
+  "info": {
+    "singularName": "horas-trabajo",
+    "pluralName": "horas-trabajos",
+    "displayName": "horas_trabajo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hora_inicio": {
+      "type": "time",
+      "required": true
+    },
+    "hora_final": {
+      "type": "time",
+      "required": true
+    }
+  }
+}

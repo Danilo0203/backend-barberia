@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "citas",
+  "info": {
+    "singularName": "cita",
+    "pluralName": "citas",
+    "displayName": "cita",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fecha": {
+      "required": true,
+      "type": "date"
+    },
+    "hora": {
+      "type": "time",
+      "required": true,
+      "unique": true
+    },
+    "usuario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::usuario.usuario",
+      "inversedBy": "citas"
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "pendiente",
+        "confirmar",
+        "cancelar"
+      ]
+    }
+  }
+}
