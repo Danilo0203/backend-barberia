@@ -43,12 +43,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::rol.rol"
-    },
-    "citas": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::cita.cita",
-      "mappedBy": "usuario"
     }
   }
 }

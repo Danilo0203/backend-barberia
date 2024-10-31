@@ -31,11 +31,10 @@
       "relation": "oneToMany",
       "target": "api::horas-trabajo.horas-trabajo"
     },
-    "dia_inicio": {
-      "type": "date"
-    },
-    "dia_final": {
-      "type": "date"
+    "dias_trabajos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dias-trabajo.dias-trabajo"
     }
   }
 }

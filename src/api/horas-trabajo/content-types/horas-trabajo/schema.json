@@ -15,10 +15,6 @@
     "hora_inicio": {
       "type": "time",
       "required": true
-    },
-    "hora_final": {
-      "type": "time",
-      "required": true
     }
   }
 }

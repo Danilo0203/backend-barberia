@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "usuario": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::usuario.usuario",
-      "inversedBy": "citas"
-    },
     "estado": {
       "type": "enumeration",
       "enum": [

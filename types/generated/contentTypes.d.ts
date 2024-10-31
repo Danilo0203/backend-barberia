@@ -384,8 +384,10 @@ export interface ApiBarberoBarbero extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dia_final: Schema.Attribute.Date;
-    dia_inicio: Schema.Attribute.Date;
+    dias_trabajos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dias-trabajo.dias-trabajo'
+    >;
     estado: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     horas_trabajos: Schema.Attribute.Relation<
       'oneToMany',
@@ -434,7 +436,36 @@ export interface ApiCitaCita extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    usuario: Schema.Attribute.Relation<'manyToOne', 'api::usuario.usuario'>;
+  };
+}
+
+export interface ApiDiasTrabajoDiasTrabajo extends Struct.CollectionTypeSchema {
+  collectionName: 'dias_trabajos';
+  info: {
+    description: '';
+    displayName: 'dias_trabajo';
+    pluralName: 'dias-trabajos';
+    singularName: 'dias-trabajo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fecha_final: Schema.Attribute.Date;
+    fecha_inicio: Schema.Attribute.Date & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dias-trabajo.dias-trabajo'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -454,7 +485,6 @@ export interface ApiHorasTrabajoHorasTrabajo
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    hora_final: Schema.Attribute.Time & Schema.Attribute.Required;
     hora_inicio: Schema.Attribute.Time & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -606,7 +636,6 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
   };
   attributes: {
     apellidos: Schema.Attribute.String & Schema.Attribute.Required;
-    citas: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1142,6 +1171,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::barbero.barbero': ApiBarberoBarbero;
       'api::cita.cita': ApiCitaCita;
+      'api::dias-trabajo.dias-trabajo': ApiDiasTrabajoDiasTrabajo;
       'api::horas-trabajo.horas-trabajo': ApiHorasTrabajoHorasTrabajo;
       'api::permiso.permiso': ApiPermisoPermiso;
       'api::rol.rol': ApiRolRol;
