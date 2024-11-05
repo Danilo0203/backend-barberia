@@ -14,7 +14,8 @@
   "attributes": {
     "hora_inicio": {
       "type": "time",
-      "required": true
+      "required": true,
+      "unique": true
     }
   }
 }

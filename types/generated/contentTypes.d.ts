@@ -404,38 +404,10 @@ export interface ApiBarberoBarbero extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    usuario: Schema.Attribute.Relation<'oneToOne', 'api::usuario.usuario'>;
-  };
-}
-
-export interface ApiCitaCita extends Struct.CollectionTypeSchema {
-  collectionName: 'citas';
-  info: {
-    description: '';
-    displayName: 'cita';
-    pluralName: 'citas';
-    singularName: 'cita';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    barbero: Schema.Attribute.Relation<'oneToOne', 'api::barbero.barbero'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    estado: Schema.Attribute.Enumeration<
-      ['pendiente', 'confirmar', 'cancelar']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'pendiente'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::cita.cita'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -454,7 +426,7 @@ export interface ApiDiasTrabajoDiasTrabajo extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    fecha_final: Schema.Attribute.Date;
+    fecha_final: Schema.Attribute.Date & Schema.Attribute.Required;
     fecha_inicio: Schema.Attribute.Date & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -485,69 +457,15 @@ export interface ApiHorasTrabajoHorasTrabajo
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    hora_inicio: Schema.Attribute.Time & Schema.Attribute.Required;
+    hora_inicio: Schema.Attribute.Time &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::horas-trabajo.horas-trabajo'
     > &
       Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiPermisoPermiso extends Struct.CollectionTypeSchema {
-  collectionName: 'permisos';
-  info: {
-    description: '';
-    displayName: 'permiso';
-    pluralName: 'permisos';
-    singularName: 'permiso';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::permiso.permiso'
-    > &
-      Schema.Attribute.Private;
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiRolRol extends Struct.CollectionTypeSchema {
-  collectionName: 'rols';
-  info: {
-    description: '';
-    displayName: 'rol';
-    pluralName: 'rols';
-    singularName: 'rol';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::rol.rol'> &
-      Schema.Attribute.Private;
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    permisos: Schema.Attribute.Relation<'oneToMany', 'api::permiso.permiso'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -620,47 +538,6 @@ export interface ApiTipoServicioTipoServicio
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
-  collectionName: 'usuarios';
-  info: {
-    description: '';
-    displayName: 'usuario';
-    pluralName: 'usuarios';
-    singularName: 'usuario';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    apellidos: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::usuario.usuario'
-    > &
-      Schema.Attribute.Private;
-    nombres: Schema.Attribute.String & Schema.Attribute.Required;
-    password: Schema.Attribute.Password & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    rol: Schema.Attribute.Relation<'oneToOne', 'api::rol.rol'>;
-    telefono: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 8;
-      }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    username: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1115,7 +992,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1170,14 +1046,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::barbero.barbero': ApiBarberoBarbero;
-      'api::cita.cita': ApiCitaCita;
       'api::dias-trabajo.dias-trabajo': ApiDiasTrabajoDiasTrabajo;
       'api::horas-trabajo.horas-trabajo': ApiHorasTrabajoHorasTrabajo;
-      'api::permiso.permiso': ApiPermisoPermiso;
-      'api::rol.rol': ApiRolRol;
       'api::servicio.servicio': ApiServicioServicio;
       'api::tipo-servicio.tipo-servicio': ApiTipoServicioTipoServicio;
-      'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

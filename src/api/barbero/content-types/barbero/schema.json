@@ -16,10 +16,10 @@
       "type": "boolean",
       "default": true
     },
-    "usuario": {
+    "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::usuario.usuario"
+      "target": "plugin::users-permissions.user"
     },
     "servicios": {
       "type": "relation",

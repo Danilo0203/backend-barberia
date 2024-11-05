@@ -17,7 +17,8 @@
       "required": true
     },
     "fecha_final": {
-      "type": "date"
+      "type": "date",
+      "required": true
     }
   }
 }
