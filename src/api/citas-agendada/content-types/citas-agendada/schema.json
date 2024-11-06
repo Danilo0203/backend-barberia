@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "citas_agendadas",
+  "info": {
+    "singularName": "citas-agendada",
+    "pluralName": "citas-agendadas",
+    "displayName": "citas_Agendada",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "usuario": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "tipo_servicios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tipo-servicio.tipo-servicio"
+    },
+    "barbero": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::barbero.barbero"
+    },
+    "fecha": {
+      "type": "date"
+    },
+    "hora": {
+      "type": "time"
+    }
+  }
+}

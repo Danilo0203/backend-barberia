@@ -378,7 +378,7 @@ export interface ApiBarberoBarbero extends Struct.CollectionTypeSchema {
     singularName: 'barbero';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -411,6 +411,46 @@ export interface ApiBarberoBarbero extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCitasAgendadaCitasAgendada
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'citas_agendadas';
+  info: {
+    description: '';
+    displayName: 'citas_Agendada';
+    pluralName: 'citas-agendadas';
+    singularName: 'citas-agendada';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    barbero: Schema.Attribute.Relation<'oneToOne', 'api::barbero.barbero'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fecha: Schema.Attribute.Date;
+    hora: Schema.Attribute.Time;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::citas-agendada.citas-agendada'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    tipo_servicios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-servicio.tipo-servicio'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    usuario: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiDiasTrabajoDiasTrabajo extends Struct.CollectionTypeSchema {
   collectionName: 'dias_trabajos';
   info: {
@@ -420,7 +460,7 @@ export interface ApiDiasTrabajoDiasTrabajo extends Struct.CollectionTypeSchema {
     singularName: 'dias-trabajo';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -451,7 +491,7 @@ export interface ApiHorasTrabajoHorasTrabajo
     singularName: 'horas-trabajo';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -482,7 +522,7 @@ export interface ApiServicioServicio extends Struct.CollectionTypeSchema {
     singularName: 'servicio';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -517,7 +557,7 @@ export interface ApiTipoServicioTipoServicio
     singularName: 'tipo-servicio';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -1046,6 +1086,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::barbero.barbero': ApiBarberoBarbero;
+      'api::citas-agendada.citas-agendada': ApiCitasAgendadaCitasAgendada;
       'api::dias-trabajo.dias-trabajo': ApiDiasTrabajoDiasTrabajo;
       'api::horas-trabajo.horas-trabajo': ApiHorasTrabajoHorasTrabajo;
       'api::servicio.servicio': ApiServicioServicio;
